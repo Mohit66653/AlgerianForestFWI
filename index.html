@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Algerian Forest Fire – FWI Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="overlay"></div>
+
+    <header class="hero">
+        <h1>🔥 Algerian Forest Fire AI</h1>
+        <p>Fire Weather Index (FWI) Prediction System</p>
+    </header>
+
+    <main class="card">
+        <h2>Input Parameters</h2>
+
+        <form method="POST">
+
+            <!-- Weather Conditions -->
+            <div class="section">
+                <h3>🌦️ Weather Conditions</h3>
+
+                <div class="field">
+                    <label>Temperature (°C)</label>
+                    <input type="number" step="any" name="Temperature" required>
+                </div>
+
+                <div class="field">
+                    <label>Relative Humidity (%)</label>
+                    <input type="number" step="any" name="RH" required>
+                </div>
+
+                <div class="field">
+                    <label>Wind Speed (km/h)</label>
+                    <input type="number" step="any" name="Ws" required>
+                </div>
+
+                <div class="field">
+                    <label>Rain (mm)</label>
+                    <input type="number" step="any" name="Rain" required>
+                </div>
+            </div>
+
+            <!-- Fire Indices -->
+            <div class="section">
+                <h3>🔥 Fire Weather Indices</h3>
+
+                <div class="field">
+                    <label>FFMC (Fine Fuel Moisture Code)</label>
+                    <input type="number" step="any" name="FFMC" required>
+                </div>
+
+                <div class="field">
+                    <label>DMC (Duff Moisture Code)</label>
+                    <input type="number" step="any" name="DMC" required>
+                </div>
+
+                <div class="field">
+                    <label>DC (Drought Code)</label>
+                    <input type="number" step="any" name="DC" required>
+                </div>
+
+                <div class="field">
+                    <label>ISI (Initial Spread Index)</label>
+                    <input type="number" step="any" name="ISI" required>
+                </div>
+
+                <div class="field">
+                    <label>BUI (Build Up Index)</label>
+                    <input type="number" step="any" name="BUI" required>
+                </div>
+            </div>
+
+            <button type="submit">Predict Fire Weather Index</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            🔥 Predicted FWI: <span>{{ prediction }}</span>
+        </div>
+
+        <div class="risk-badge
+        {% if prediction <= 7 %}low
+        {% elif prediction <= 16 %}moderate
+        {% elif prediction <= 30 %}high
+        {% else %}extreme{% endif %}">
+
+            {% if prediction <= 7 %} LOW FIRE RISK {% elif prediction <=16 %} MODERATE FIRE RISK {% elif prediction <=30
+                %} HIGH FIRE RISK {% else %} EXTREME FIRE RISK {% endif %} </div>
+                {% endif %}
+    </main>
+
+    <footer>
+        Developed by <strong>Mohit Dinesh Patil</strong>
+    </footer>
+
+</body>
+
+</html>
