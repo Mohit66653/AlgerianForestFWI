@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algerian Forest Fire Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+
+        <header>
+            <h1>Algerian Forest Fire FWI Predictor</h1>
+            <p class="subtitle">Machine Learning Model by Mohit Dinesh Patil</p>
+        </header>
+
+        <div class="glass-card">
+
+            {% if prediction is not none %}
+            <div class="result-box fade-in">
+
+                {% if prediction|float > 20 %}
+                <h2 class="status-danger">🔥 High Fire Danger 🔥</h2>
+                {% elif prediction|float > 10 %}
+                <h2 class="status-warning">⚠️ Moderate Danger</h2>
+                {% else %}
+                <h2 class="status-safe">✅ Low Danger</h2>
+                {% endif %}
+
+                <p class="result-label">Predicted Fire Weather Index (FWI)</p>
+
+                <div class="score-display">
+                    {{ prediction }}
+                </div>
+
+                <div class="info-text">
+                    <p>Based on the weather data provided, this is the estimated fire intensity potential.</p>
+                </div>
+
+                <a href="{{ url_for('home') }}" class="btn btn-retry">Analyze New Data</a>
+            </div>
+
+            {% else %}
+            <form action="{{ url_for('home') }}" method="post" class="input-grid fade-in">
+
+                <div class="input-group">
+                    <label>Temperature (°C)</label>
+                    <input type="number" step="any" name="Temperature" required placeholder="35">
+                </div>
+
+                <div class="input-group">
+                    <label>Relative Humidity (%)</label>
+                    <input type="number" step="any" name="RH" required placeholder="55">
+                </div>
+
+                <div class="input-group">
+                    <label>Wind Speed (km/h)</label>
+                    <input type="number" step="any" name="Ws" required placeholder="15">
+                </div>
+
+                <div class="input-group">
+                    <label>Rain (mm)</label>
+                    <input type="number" step="any" name="Rain" required placeholder="0.0">
+                </div>
+
+                <div class="input-group">
+                    <label>FFMC Index</label>
+                    <input type="number" step="any" name="FFMC" required placeholder="85.0">
+                </div>
+
+                <div class="input-group">
+                    <label>DMC Index</label>
+                    <input type="number" step="any" name="DMC" required placeholder="15.0">
+                </div>
+
+                <div class="input-group">
+                    <label>ISI Index</label>
+                    <input type="number" step="any" name="ISI" required placeholder="5.0">
+                </div>
+
+                <div class="input-group">
+                    <label>Class</label>
+                    <select name="Classes">
+                        <option value="0">Not Fire</option>
+                        <option value="1">Fire</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Region</label>
+                    <select name="Region">
+                        <option value="0">Bejaia</option>
+                        <option value="1">Sidi Bel-Abbes</option>
+                    </select>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="btn btn-predict">Predict FWI</button>
+                </div>
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+
+</body>
+
+</html>

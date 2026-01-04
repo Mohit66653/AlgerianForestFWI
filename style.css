@@ -1,0 +1,231 @@
+/* --- RESET & FONTS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    background-image: url('ForestFire.jpeg');
+}
+
+/* --- BACKGROUND IMAGE HANDLING --- */
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/ForestFire.jpeg') no-repeat center center/cover;
+    z-index: -2;
+    filter: blur(3px);
+    /* Slight blur to make text pop */
+    transform: scale(1.05);
+    /* Prevent blur edges showing */
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(50, 20, 10, 0.8));
+    z-index: -1;
+}
+
+/* --- MAIN CONTAINER --- */
+.container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    text-align: center;
+    z-index: 1;
+}
+
+header h1 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+/* --- GLASS CARD --- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: transform 0.3s ease;
+}
+
+/* --- FORM GRID --- */
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 100, 50, 0.4);
+}
+
+.submit-container {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+}
+
+/* --- BUTTONS --- */
+.btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-predict {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+}
+
+.btn-predict:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
+}
+
+.btn-retry {
+    background: #fff;
+    color: #333;
+    margin-top: 20px;
+    max-width: 200px;
+}
+
+.btn-retry:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* --- RESULT INTERFACE STYLING --- */
+.result-box {
+    padding: 20px;
+}
+
+.status-danger {
+    color: #ff4b2b;
+    text-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
+}
+
+.status-warning {
+    color: #ffb142;
+    text-shadow: 0 2px 10px rgba(255, 165, 0, 0.3);
+}
+
+.status-safe {
+    color: #2ed573;
+    text-shadow: 0 2px 10px rgba(0, 255, 0, 0.3);
+}
+
+.result-box h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.result-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+}
+
+.score-display {
+    font-size: 5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 10px 0;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.info-text {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* --- ANIMATION --- */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .glass-card {
+        padding: 25px;
+    }
+
+    .score-display {
+        font-size: 3.5rem;
+    }
+}
